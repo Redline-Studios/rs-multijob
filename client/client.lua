@@ -1,11 +1,41 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+
 local function toggleNuiFrame(shouldShow)
   SetNuiFocus(shouldShow, shouldShow)
   SendReactMessage('setVisible', shouldShow)
 end
 
-RegisterCommand('show-nui', function()
+RegisterCommand('multijob', function()
   toggleNuiFrame(true)
   debugPrint('Show NUI frame')
+end)
+
+RegisterNUICallback('getAllSharedJobs', function(data, cb)
+  QBCore.Functions.TriggerCallback('qw-multijob:server:getAllNonWhitelistedSharedJobs', function(result)
+    cb(result)
+  end)
+end)
+
+RegisterNUICallback('getCurrentPlayerJobs', function(data, cb)
+  QBCore.Functions.TriggerCallback('qw-multijob:server:getCurrentPlayerJobs', function(result)
+    cb(result)
+  end)
+end)
+
+RegisterNUICallback('setPlayerJob', function(data, cb)
+  local job = data.job
+  local type = data.type
+  local rank = data.rank
+
+  if type == 'nonWhitelisted' then
+    TriggerServerEvent('qw-multijob:server:setPlayerUnwhitelistedJob', job)
+    QBCore.Functions.Notify('Job has been Updated to: '..job, 'success', 7500)
+    cb({})
+  else 
+    TriggerServerEvent('qw-multijob:server:setPlayerWhitelistedJob', job, rank)
+    QBCore.Functions.Notify('Job has been Updated to: '..job, 'success', 7500)
+    cb({})
+  end
 end)
 
 RegisterNUICallback('hideFrame', function(_, cb)
@@ -14,12 +44,3 @@ RegisterNUICallback('hideFrame', function(_, cb)
   cb({})
 end)
 
-RegisterNUICallback('getClientData', function(data, cb)
-  debugPrint('Data sent by React', json.encode(data))
-
--- Lets send back client coords to the React frame for use
-  local curCoords = GetEntityCoords(PlayerPedId())
-
-  local retData <const> = { x = curCoords.x, y = curCoords.y, z = curCoords.z }
-  cb(retData)
-end)

@@ -1,13 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { VisibilityProvider } from './providers/VisibilityProvider';
-import App from './components/App';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { VisibilityProvider } from "./providers/VisibilityProvider";
+import App from "./components/App";
+import { createGlobalStyle } from "styled-components";
+import TabProvider from "./providers/TabProvider";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+`;
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <VisibilityProvider>
-      <App />
+      <TabProvider>
+        <GlobalStyle />
+        <App />
+      </TabProvider>
     </VisibilityProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

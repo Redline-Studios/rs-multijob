@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS `player_multijobs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cid` VARCHAR(20) DEFAULT NULL,
+  `job` VARCHAR(20) DEFAULT NULL,
+  `isActive` BOOLEAN DEFAULT FALSE,
+  `rank` VARCHAR(20) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `cid` (`cid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
