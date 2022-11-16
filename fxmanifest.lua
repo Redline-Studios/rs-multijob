@@ -1,7 +1,7 @@
 fx_version "cerulean"
 
 description "Basic MutiJob System"
-author "qw-scripts"
+author "Redline Studios"
 version '1.0.0'
 
 lua54 'yes'
