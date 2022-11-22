@@ -1,6 +1,7 @@
 import { Briefcase, ListDashes, Wrench } from "phosphor-react";
 import React, { useState } from "react";
 import { useTab } from "../providers/TabProvider";
+import { useTheme } from "../providers/ThemeProvider";
 import { useVisibility } from "../providers/VisibilityProvider";
 import { debugData } from "../utils/debugData";
 import { fetchNui } from "../utils/fetchNui";
@@ -45,6 +46,7 @@ const App: React.FC = () => {
   const [nonWhitelistedJobs, setNonWhitelistedJobs] = useState<INWJobs[]>([]);
   const { activeTab, setActiveTab } = useTab();
   const { visible } = useVisibility();
+  const { theme } = useTheme();
 
   const scrollToRef = React.useRef<HTMLDivElement>(null);
   const executeScroll = () => scrollToRef.current?.scrollIntoView();
@@ -84,38 +86,39 @@ const App: React.FC = () => {
   }, [visible, activeTab]);
 
   return (
-    <NUIContainer>
-      <SidebarContainer>
+    <NUIContainer theme={theme}>
+      <SidebarContainer theme={theme}>
         <SidebarInnerContainer>
-          <TextContainer>
-            <TextBold>MJ</TextBold>
-          </TextContainer>
+            <img src="https://cdn.discordapp.com/attachments/1041867720880304269/1044468486757425152/Redline_Logo_nobg.png" alt="redline studios logo" style={{ 
+              width: "64px",
+              height: "64px",
+            }} />
           <SidebarTabsContainer>
             {activeTab === "alljobs" ? (
-              <SidebarTabSelectedContainer>
-                <ListDashes size={24} color="#02f1b5" />
+              <SidebarTabSelectedContainer theme={theme}>
+                <ListDashes size={24} color="#e8e8e8" />
               </SidebarTabSelectedContainer>
             ) : (
-              <SidebarTabContainer onClick={() => setActiveTab("alljobs")}>
-                <ListDashes size={24} color="#797979" />
+              <SidebarTabContainer theme={theme} onClick={() => setActiveTab("alljobs")}>
+                <ListDashes size={24} color="#757575" />
               </SidebarTabContainer>
             )}
             {activeTab === "currentjobs" ? (
-              <SidebarTabSelectedContainer>
-                <Briefcase size={24} color="#02f1b5" />
+              <SidebarTabSelectedContainer theme={theme}>
+                <Briefcase size={24} color="#e8e8e8" />
               </SidebarTabSelectedContainer>
             ) : (
-              <SidebarTabContainer onClick={() => setActiveTab("currentjobs")}>
-                <Briefcase size={24} color="#797979" />
+              <SidebarTabContainer theme={theme} onClick={() => setActiveTab("currentjobs")}>
+                <Briefcase size={24} color="#757575" />
               </SidebarTabContainer>
             )}
             {activeTab === "settings" ? (
-              <SidebarTabSelectedContainer>
-                <Wrench size={24} color="#02f1b5" />
+              <SidebarTabSelectedContainer theme={theme}>
+                <Wrench size={24} color="#e8e8e8" />
               </SidebarTabSelectedContainer>
             ) : (
-              <SidebarTabContainer onClick={() => setActiveTab("settings")}>
-                <Wrench size={24} color="#797979" />
+              <SidebarTabContainer theme={theme} onClick={() => setActiveTab("settings")}>
+                <Wrench size={24} color="#757575" />
               </SidebarTabContainer>
             )}
           </SidebarTabsContainer>
@@ -128,7 +131,7 @@ const App: React.FC = () => {
               <TextSmaller>CATEGORY</TextSmaller>
               <TextBold>All Non-Whitelisted Jobs</TextBold>
             </TextContainer>
-            <JobDisplayContainer>
+            <JobDisplayContainer theme={theme}>
               {nonWhitelistedJobs.map((job, index) => (
                 <JobCard
                   key={index}

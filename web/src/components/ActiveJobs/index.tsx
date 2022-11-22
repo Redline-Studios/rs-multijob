@@ -1,5 +1,6 @@
 import React from "react";
 import { useTab } from "../../providers/TabProvider";
+import { useTheme } from "../../providers/ThemeProvider";
 import { fetchNui } from "../../utils/fetchNui";
 import {
   TextContainer,
@@ -23,6 +24,7 @@ interface ICurrentJobs {
 export default function ActiveJobs() {
   const { activeTab } = useTab();
   const [currentJobs, setCurrentJobs] = React.useState<ICurrentJobs[]>([]);
+  const { theme } = useTheme();
 
   const handleGetClientData = () => {
     fetchNui<ICurrentJobs[]>("getCurrentPlayerJobs")
@@ -63,7 +65,7 @@ export default function ActiveJobs() {
         <TextSmaller>CATEGORY</TextSmaller>
         <TextBold>Current Whitelisted Jobs</TextBold>
       </TextContainer>
-        <JobDisplayContainer>
+        <JobDisplayContainer theme={theme}>
           {currentJobs.length > 0
             ? currentJobs.map((job, index) => (
                 <JobCard

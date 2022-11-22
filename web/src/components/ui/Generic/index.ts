@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 export const Text = styled.p`
     color: #fff;
@@ -22,4 +22,10 @@ export const TextBold = styled(Text)`
 
 export const TextContainer = styled.div`
     padding: 1.5rem;
+`;
+
+export const TextFlexContainer = styled.div`
+    display: flex;
+    gap: 4px;
+    align-items: center;
 `;

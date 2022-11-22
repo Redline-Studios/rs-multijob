@@ -1,15 +1,25 @@
 import styled from "styled-components";
+import { ITheme } from "../../../types/theme";
+import { ThemeConfig } from "../ThemeConfig/config";
 
-export const NUIContainer = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
+export const NUIContainer = styled.div<ITheme>`
+  position: absolute;
+  top: 0;
+  left: 0;
 
-    width: 20vw;
-    height: 100vh;
+  width: 20vw;
+  height: 100vh;
 
-    background-color: #131121;
-    
+  background-color: ${(props) =>
+    props.theme === "redline"
+      ? ThemeConfig.redline.NUIBackground
+      : props.theme === "qbox"
+      ? ThemeConfig.qbox.NUIBackground
+      : ThemeConfig.default.NUIBackground};
 
-    overflow: hidden;
+  overflow: hidden;
+
+  @media (max-width: 1920px) {
+    width: 23vw;
+  }
 `;

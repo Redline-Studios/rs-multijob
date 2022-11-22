@@ -4,6 +4,7 @@ import { VisibilityProvider } from "./providers/VisibilityProvider";
 import App from "./components/App";
 import { createGlobalStyle } from "styled-components";
 import TabProvider from "./providers/TabProvider";
+import { ThemeProvider } from "./providers/ThemeProvider";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -17,8 +18,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <VisibilityProvider>
       <TabProvider>
-        <GlobalStyle />
-        <App />
+        <ThemeProvider>
+          <GlobalStyle />
+          <App />
+        </ThemeProvider>
       </TabProvider>
     </VisibilityProvider>
   </React.StrictMode>

@@ -7,7 +7,10 @@ end
 
 RegisterCommand('multijob', function()
   toggleNuiFrame(true)
-  debugPrint('Show NUI frame')
+end)
+
+RegisterNetEvent('rs-multijob:client:toggleUI', function()
+  toggleNuiFrame(true)
 end)
 
 RegisterNUICallback('getAllSharedJobs', function(data, cb)
