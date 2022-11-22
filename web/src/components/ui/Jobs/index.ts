@@ -56,6 +56,8 @@ export const JobCardContainer = styled.div<ITheme>`
       ? ThemeConfig.redline.jobCardContainer
       : props.theme === "qbox"
       ? ThemeConfig.qbox.jobCardContainer
+      : props.theme === "nopixel"
+      ? ThemeConfig.nopixel.jobCardContainer
       : ThemeConfig.default.jobCardContainer};
   border-radius: 0.5rem;
   border: ${(props) =>
@@ -63,6 +65,8 @@ export const JobCardContainer = styled.div<ITheme>`
       ? ThemeConfig.redline.jobCardBorder
       : props.theme === "qbox"
       ? ThemeConfig.qbox.jobCardBorder
+      : props.theme === "nopixel"
+      ? ThemeConfig.nopixel.jobCardBorder
       : ThemeConfig.default.jobCardBorder};
 `;
 
@@ -86,6 +90,8 @@ export const JobCardDataDisplay = styled.div<ITheme>`
       ? ThemeConfig.redline.jobCardBorder
       : props.theme === "qbox"
       ? ThemeConfig.qbox.jobCardBorder
+      : props.theme === "nopixel"
+      ? ThemeConfig.nopixel.jobCardBorder
       : ThemeConfig.default.jobCardBorder};
   border-radius: 0.5rem;
   padding: 0.5rem;
@@ -118,11 +124,15 @@ export const JobCardSelectButton = styled.div<IJobCardBottonProps>`
         ? ThemeConfig.redline.jobCardSelectButtonBGSelected
         : props.theme === "qbox"
         ? ThemeConfig.qbox.jobCardSelectButtonBGSelected
+        : props.theme === "nopixel"
+        ? ThemeConfig.nopixel.jobCardSelectButtonBGSelected
         : ThemeConfig.default.jobCardSelectButtonBGSelected
       : props.theme === "redline"
       ? ThemeConfig.redline.jobCardSelectButtonBGUnselected
       : props.theme === "qbox"
       ? ThemeConfig.qbox.jobCardSelectButtonBGUnselected
+      : props.theme === "nopixel"
+      ? ThemeConfig.nopixel.jobCardSelectButtonBGUnselected
       : ThemeConfig.default.jobCardSelectButtonBGUnselected};
   border: ${(props) =>
     props.selected
@@ -130,12 +140,17 @@ export const JobCardSelectButton = styled.div<IJobCardBottonProps>`
         ? ThemeConfig.redline.jobCardSelectButtonBorderSelected
         : props.theme === "qbox"
         ? ThemeConfig.qbox.jobCardSelectButtonBorderSelected
+        : props.theme === "nopixel"
+        ? ThemeConfig.nopixel.jobCardSelectButtonBorderSelected
         : ThemeConfig.default.jobCardSelectButtonBorderSelected
       : props.theme === "redline"
       ? ThemeConfig.redline.jobCardSelectButtonBorderUnselected
       : props.theme === "qbox"
       ? ThemeConfig.qbox.jobCardSelectButtonBorderUnselected
+      : props.theme === "nopixel"
+      ? ThemeConfig.nopixel.jobCardSelectButtonBorderUnselected
       : ThemeConfig.default.jobCardSelectButtonBorderUnselected};
+
   border-radius: 0.5rem;
   height: 3rem;
   width: 100%;
@@ -148,12 +163,17 @@ export const JobCardSelectButton = styled.div<IJobCardBottonProps>`
         ? ThemeConfig.redline.jobCardSelectButtonTextColorSelected
         : props.theme === "qbox"
         ? ThemeConfig.qbox.jobCardSelectButtonTextColorSelected
+        : props.theme === "nopixel"
+        ? ThemeConfig.nopixel.jobCardSelectButtonTextColorSelected
         : ThemeConfig.default.jobCardSelectButtonTextColorSelected
       : props.theme === "redline"
       ? ThemeConfig.redline.jobCardSelectButtonTextColorUnselected
       : props.theme === "qbox"
       ? ThemeConfig.qbox.jobCardSelectButtonTextColorUnselected
+      : props.theme === "nopixel"
+      ? ThemeConfig.nopixel.jobCardSelectButtonTextColorUnselected
       : ThemeConfig.default.jobCardSelectButtonTextColorUnselected};
+
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 
   &:hover {
@@ -164,11 +184,15 @@ export const JobCardSelectButton = styled.div<IJobCardBottonProps>`
         ? ThemeConfig.redline.jobCardSelectButtonHoverBGSelected
         : props.theme === "qbox"
         ? ThemeConfig.qbox.jobCardSelectButtonHoverBGSelected
+        : props.theme === "nopixel"
+        ? ThemeConfig.nopixel.jobCardSelectButtonHoverBGSelected
         : ThemeConfig.default.jobCardSelectButtonHoverBGSelected
       : props.theme === "redline"
       ? ThemeConfig.redline.jobCardSelectButtonHoverBGUnselected
       : props.theme === "qbox"
       ? ThemeConfig.qbox.jobCardSelectButtonHoverBGUnselected
+      : props.theme === "nopixel"
+      ? ThemeConfig.nopixel.jobCardSelectButtonHoverBGUnselected
       : ThemeConfig.default.jobCardSelectButtonHoverBGUnselected};
   }
 `;

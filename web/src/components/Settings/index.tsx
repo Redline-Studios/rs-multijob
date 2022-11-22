@@ -24,6 +24,7 @@ export default function Settings() {
       <SettingsThemeDropdown onChange={handleThemeChange} theme={theme}>
         <SettingsThemeDropdownOption value='redline' selected={theme === 'redline' ? true : false}>redline</SettingsThemeDropdownOption>
         <SettingsThemeDropdownOption value='qbox' selected={theme === 'qbox' ? true : false}>qbox</SettingsThemeDropdownOption>
+        <SettingsThemeDropdownOption value='nopixel' selected={theme === 'nopixel' ? true : false}>nopixel</SettingsThemeDropdownOption>
       </SettingsThemeDropdown>
     </SettingsContainer>
   );

@@ -15,6 +15,8 @@ export const NUIContainer = styled.div<ITheme>`
       ? ThemeConfig.redline.NUIBackground
       : props.theme === "qbox"
       ? ThemeConfig.qbox.NUIBackground
+      : props.theme === "nopixel"
+      ? ThemeConfig.nopixel.NUIBackground
       : ThemeConfig.default.NUIBackground};
 
   overflow: hidden;

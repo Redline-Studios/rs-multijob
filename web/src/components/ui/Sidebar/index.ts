@@ -15,13 +15,17 @@ export const SidebarContainer = styled.div<ITheme>`
             ? ThemeConfig.redline.sidebarBackground
             : props.theme === "qbox"
             ? ThemeConfig.qbox.sidebarBackground
+            : props.theme === "nopixel"
+            ? ThemeConfig.nopixel.sidebarBackground
             : ThemeConfig.default.sidebarBackground};
             
-    border-right: 1px solid ${(props) =>
+    border-right: ${(props) =>
         props.theme === "redline"
             ? ThemeConfig.redline.sidebarBorderRight
             : props.theme === "qbox"
             ? ThemeConfig.qbox.sidebarBorderRight
+            : props.theme === "nopixel"
+            ? ThemeConfig.nopixel.sidebarBorderRight
             : ThemeConfig.default.sidebarBorderRight};
 
 `;
@@ -55,6 +59,8 @@ export const SidebarTabContainer = styled.div<ITheme>`
                 ? ThemeConfig.redline.sidebarTabHoverBG
                 : props.theme === "qbox"
                 ? ThemeConfig.qbox.sidebarTabHoverBG
+                : props.theme === "nopixel"
+                ? ThemeConfig.nopixel.sidebarTabHoverBG
                 : ThemeConfig.default.sidebarTabHoverBG};
 
     }
@@ -73,6 +79,8 @@ export const SidebarTabSelectedContainer = styled.div<ITheme>`
             ? ThemeConfig.redline.sidebarTabSelectedBorderLeft
             : props.theme === "qbox"
             ? ThemeConfig.qbox.sidebarTabSelectedBorderLeft
+            : props.theme === "nopixel"
+            ? ThemeConfig.nopixel.sidebarTabSelectedBorderLeft
             : ThemeConfig.default.sidebarTabSelectedBorderLeft};
 
     background-color: ${(props) =>
@@ -80,6 +88,8 @@ export const SidebarTabSelectedContainer = styled.div<ITheme>`
             ? ThemeConfig.redline.sidebarTabSelectedBG
             : props.theme === "qbox"
             ? ThemeConfig.qbox.sidebarTabSelectedBG
+            : props.theme === "nopixel"
+            ? ThemeConfig.nopixel.sidebarTabSelectedBG
             : ThemeConfig.default.sidebarTabSelectedBG};
             
 

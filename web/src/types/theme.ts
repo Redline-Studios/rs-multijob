@@ -1,3 +1,3 @@
 export interface ITheme {
-    theme: 'redline' | 'qbox';
+    theme: 'redline' | 'qbox' | 'nopixel';
 }

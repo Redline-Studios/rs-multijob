@@ -19,12 +19,16 @@ export const SettingsThemeDropdown = styled.select<ITheme>`
       ? ThemeConfig.redline.settingsThemeDropdownBackground
       : props.theme === "qbox"
       ? ThemeConfig.qbox.settingsThemeDropdownBackground
+      : props.theme === "nopixel"
+      ? ThemeConfig.nopixel.settingsThemeDropdownBackground
       : ThemeConfig.default.settingsThemeDropdownBackground};
   color: ${(props) =>
     props.theme === "redline"
       ? ThemeConfig.redline.settingsThemeDropdownTextColor
       : props.theme === "qbox"
       ? ThemeConfig.qbox.settingsThemeDropdownTextColor
+      : props.theme === "nopixel"
+      ? ThemeConfig.nopixel.settingsThemeDropdownTextColor
       : ThemeConfig.default.settingsThemeDropdownTextColor};
 
   font-size: 1rem;

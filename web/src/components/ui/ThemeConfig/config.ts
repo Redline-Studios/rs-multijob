@@ -67,5 +67,34 @@ export const ThemeConfig = {
         sidebarTabHoverBG: '#424242',
         sidebarTabSelectedBorderLeft: '4px solid #FFEE58',
         sidebarTabSelectedBG: '#212121',
+    },
+    nopixel: {
+        scrollBarTrack: '#424242', //not used anymore
+        scrollBarThumb: '#EF5350', //not used anymore
+        // job card
+        jobCardContainer: '#2c5472',
+        jobCardBorder: '1px solid #1e3c52',
+        //data display
+        jobCardDataDisplayBorder: '1px solid #00f9b9',
+        //select button
+        jobCardSelectButtonBGSelected: '',
+        jobCardSelectButtonBGUnselected: '#d8dada',
+        jobCardSelectButtonBorderSelected: '2px solid #d8dada',
+        jobCardSelectButtonBorderUnselected: '',
+        jobCardSelectButtonTextColorSelected: '#fff',
+        jobCardSelectButtonTextColorUnselected: '#1b1843',
+        jobCardSelectButtonHoverBGSelected: '',
+        jobCardSelectButtonHoverBGUnselected: '#9faeb2',
+        // nui
+        NUIBackground: '#353e49',
+        // settings
+        settingsThemeDropdownBackground: '#d8dada',
+        settingsThemeDropdownTextColor: '#000',
+        // sidebar
+        sidebarBackground: '#2c5472',
+        sidebarBorderRight: '1px solid #d8dada',
+        sidebarTabHoverBG: '#353e49',
+        sidebarTabSelectedBorderLeft: '4px solid #d8dada',
+        sidebarTabSelectedBG: '#353e49',
     }
 }
