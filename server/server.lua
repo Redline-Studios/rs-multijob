@@ -1,15 +1,5 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
-if Config.EnableCommand then
-    QBCore.Commands.Add('multijob', 'Access the multijob menu', {}, false, function(source, args)
-        local src = source
-        local Player = QBCore.Functions.GetPlayer(src)
-        if Player then
-            TriggerClientEvent('rs-multijob:client:toggleUI', src)
-        end
-    end, 'user')
-  end
-
 function GetJobCount(job)
     local count = 0
     local Players = QBCore.Functions.GetQBPlayers()
@@ -111,14 +101,18 @@ end)
 
 -- Commands
 
-QBCore.Commands.Add('hirejob', 'Hire a person onto a Whitelisted job', { { name = 'playerid', help = 'player id of person to set job for' }, { name = 'jobname', help = 'name of job to add to persons multijob list' }, { name = 'rank', help = 'rank to hire person on at' } }, true, function(source, args)
+QBCore.Commands.Add('hireplayer', 'Hire a person onto a Whitelisted job', { { name = 'playerid', help = 'player id of person to set job for' }, { name = 'jobname', help = 'name of job to add to persons multijob list' }, { name = 'rank', help = 'rank to hire person on at' } }, true, function(source, args)
     local src = source
     local Player = QBCore.Functions.GetPlayer(tonumber(args[1]))
+    local SourcePlayer = QBCore.Functions.GetPlayer(src)
+    local SourcePlayerJob = SourcePlayer.PlayerData.job.name
     local job = args[2]
     local rank = args[3]
 
     if QBCore.Shared.Jobs[job] == nil then return TriggerClientEvent('QBCore:Notify', source, 'Invalid Job Name', 'error') end
     if QBCore.Shared.Jobs[job].isWhitelisted == false then return TriggerClientEvent('QBCore:Notify', source, 'Can not add a Non-Whitelisted Job to the whitelisted jobs', 'error') end
+
+    if SourcePlayerJob ~= job then return TriggerClientEvent('QBCore:Notify', source, 'You must be on duty before hiring someone!', 'error') end
 
     if Player then
         local result =  MySQL.query.await('SELECT * FROM player_multijobs WHERE cid = @cid AND job = @job', {
@@ -140,8 +134,18 @@ QBCore.Commands.Add('hirejob', 'Hire a person onto a Whitelisted job', { { name 
             })
         end
 
-        TriggerClientEvent('QBCore:Notify', src, 'Successfully add Job to Player', 'success')
+        TriggerClientEvent('QBCore:Notify', src, 'Successfully add/updated Job to Player', 'success')
     else
         TriggerClientEvent('QBCore:Notify', src, 'Player not online', 'error')
     end
-end, 'admin')
+end, 'user')
+
+if Config.EnableCommand then
+    QBCore.Commands.Add('multijob', 'Access the multijob menu', {}, false, function(source, args)
+        local src = source
+        local Player = QBCore.Functions.GetPlayer(src)
+        if Player then
+            TriggerClientEvent('rs-multijob:client:toggleUI', src)
+        end
+    end, 'user')
+end
