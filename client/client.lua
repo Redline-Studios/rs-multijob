@@ -5,9 +5,6 @@ local function toggleNuiFrame(shouldShow)
   SendReactMessage('setVisible', shouldShow)
 end
 
-RegisterCommand('multijob', function()
-  toggleNuiFrame(true)
-end)
 
 RegisterNetEvent('rs-multijob:client:toggleUI', function()
   toggleNuiFrame(true)

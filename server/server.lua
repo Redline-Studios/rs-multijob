@@ -1,5 +1,15 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
+if Config.EnableCommand then
+    QBCore.Commands.Add('multijob', 'Access the multijob menu', {}, false, function(source, args)
+        local src = source
+        local Player = QBCore.Functions.GetPlayer(src)
+        if Player then
+            TriggerClientEvent('rs-multijob:client:toggleUI', src)
+        end
+    end, 'user')
+  end
+
 function GetJobCount(job)
     local count = 0
     local Players = QBCore.Functions.GetQBPlayers()

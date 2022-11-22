@@ -2,7 +2,7 @@
 
 ## Redline Studios Discord
 
-<https://discord.gg/RCU9XEvnsE>
+<https://dsc.gg/redlinestudios>
 
 ## Install
 
@@ -15,3 +15,17 @@ isWhitelisted = false, -- is your job Whitelisted or Not
 ```
 
 - run the included `db.sql` file on your database
+
+- Setup the Config as you want for your server
+
+## Events
+
+- Open multijob with event
+
+```lua
+-- Client
+TriggerEvent('rs-multijob:client:toggleUI')
+
+-- Server
+TriggerClientEvent('rs-multijob:client:toggleUI', src)
+```

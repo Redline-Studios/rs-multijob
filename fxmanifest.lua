@@ -18,6 +18,10 @@ server_script  {
   "server/**/*"
 }
 
+shared_script  {
+  "shared/*.lua"
+}
+
 files {
 	'web/build/index.html',
 	'web/build/**/*',
