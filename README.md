@@ -4,8 +4,9 @@
 
 <https://dsc.gg/redlinestudios>
 
-## Install
+## install from the [lastest release](https://github.com/Redline-Studios/rs-multijob/releases/latest) or it will not work
 
+## Install
 - place rs-multijob in [qb] folder
 - update all jobs in `qb-core/shared/jobs.lua` to have the following additional fields
 
