@@ -11,7 +11,7 @@ function GetJobCount(job)
     return count
 end
 
-QBCore.Functions.CreateCallback('qw-multijob:server:getAllNonWhitelistedSharedJobs', function(source, cb)
+QBCore.Functions.CreateCallback('rs-multijob:server:getAllNonWhitelistedSharedJobs', function(source, cb)
     local jobs = QBCore.Shared.Jobs
     local src = source
 
@@ -24,7 +24,7 @@ QBCore.Functions.CreateCallback('qw-multijob:server:getAllNonWhitelistedSharedJo
 
     for jobName, jobData in pairs(jobs) do
         if jobData.isWhitelisted == false then
-            table.insert(result, {
+            result[jobName] = {
                 label = jobData.label,
                 description = jobData.description,
                 hourlyPay = jobData.grades['0'].payment,
@@ -32,19 +32,19 @@ QBCore.Functions.CreateCallback('qw-multijob:server:getAllNonWhitelistedSharedJo
                 currentlyActiveAmount = GetJobCount(jobName),
                 jobName = jobName,
                 isActive =  PlayerJob == jobName,
-            })
+            }
         end
     end
 
     cb(result)
 end)
 
-QBCore.Functions.CreateCallback('qw-multijob:server:getCurrentPlayerJobs', function(source, cb)
+QBCore.Functions.CreateCallback('rs-multijob:server:getCurrentPlayerJobs', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local citizenId = Player.PlayerData.citizenid
 
-    local retData = MySQL.Sync.fetchAll('SELECT * FROM player_multijobs WHERE cid = @cid', {
+    local retData = MySQL.query.await('SELECT * FROM player_multijobs WHERE cid = @cid', {
         ['@cid'] = citizenId
     })
 
@@ -52,7 +52,7 @@ QBCore.Functions.CreateCallback('qw-multijob:server:getCurrentPlayerJobs', funct
 
     for _, v in pairs(retData) do
         local jobData = QBCore.Shared.Jobs[v.job]
-        table.insert(result, {
+        result[#result+1] = {
             label = jobData.label,
             description = jobData.description,
             hourlyPay = jobData.grades[v.rank].payment,
@@ -61,13 +61,13 @@ QBCore.Functions.CreateCallback('qw-multijob:server:getCurrentPlayerJobs', funct
             jobName = v.job,
             isActive = v.isActive,
             rankNumber = v.rank,
-        })
+        }
     end
 
     cb(result)
 end)
 
-RegisterNetEvent('qw-multijob:server:setPlayerUnwhitelistedJob', function(job) 
+RegisterNetEvent('rs-multijob:server:setPlayerUnwhitelistedJob', function(job) 
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local citizenId = Player.PlayerData.citizenid
@@ -79,7 +79,7 @@ RegisterNetEvent('qw-multijob:server:setPlayerUnwhitelistedJob', function(job)
     })
 end)
 
-RegisterNetEvent('qw-multijob:server:setPlayerWhitelistedJob', function(job, rank) 
+RegisterNetEvent('rs-multijob:server:setPlayerWhitelistedJob', function(job, rank) 
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     Player.Functions.SetJob(job, rank)
