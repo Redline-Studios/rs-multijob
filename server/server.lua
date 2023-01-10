@@ -104,13 +104,17 @@ end)
 QBCore.Commands.Add('hireplayer', 'Hire a person onto a Whitelisted job', { { name = 'playerid', help = 'player id of person to set job for' }, { name = 'jobname', help = 'name of job to add to persons multijob list' }, { name = 'rank', help = 'rank to hire person on at' } }, true, function(source, args)
     local src = source
     local Player = QBCore.Functions.GetPlayer(tonumber(args[1]))
+
     local SourcePlayer = QBCore.Functions.GetPlayer(src)
     local SourcePlayerJob = SourcePlayer.PlayerData.job.name
+    local SourcePlayerIsBoss = SourcePlayer.PlayerData.job.isboss
+
     local job = args[2]
     local rank = args[3]
 
     if QBCore.Shared.Jobs[job] == nil then return TriggerClientEvent('QBCore:Notify', source, 'Invalid Job Name', 'error') end
     if QBCore.Shared.Jobs[job].isWhitelisted == false then return TriggerClientEvent('QBCore:Notify', source, 'Can not add a Non-Whitelisted Job to the whitelisted jobs', 'error') end
+    if SourcePlayerIsBoss == false then return TriggerClientEvent('QBCore:Notify', source, 'You must be a boss to hire someone!', 'error') end
 
     if SourcePlayerJob ~= job then return TriggerClientEvent('QBCore:Notify', source, 'You must be on duty before hiring someone!', 'error') end
 
@@ -135,6 +139,36 @@ QBCore.Commands.Add('hireplayer', 'Hire a person onto a Whitelisted job', { { na
         end
 
         TriggerClientEvent('QBCore:Notify', src, 'Successfully add/updated Job to Player', 'success')
+    else
+        TriggerClientEvent('QBCore:Notify', src, 'Player not online', 'error')
+    end
+end, 'user')
+
+QBCore.Commands.Add('fireplayer', 'Fire a person from a Whitelisted job', { { name = 'playerid', help = 'player id of person to set job for' }, { name = 'jobname', help = 'name of job to remove from the persons multijob list' } }, true, function(source, args)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(tonumber(args[1]))
+
+    local SourcePlayer = QBCore.Functions.GetPlayer(src)
+    local SourcePlayerJob = SourcePlayer.PlayerData.job.name
+    local SourcePlayerIsBoss = SourcePlayer.PlayerData.job.isboss
+    
+    local job = args[2]
+
+    if QBCore.Shared.Jobs[job] == nil then return TriggerClientEvent('QBCore:Notify', source, 'Invalid Job Name', 'error') end
+    if SourcePlayerJob ~= job then return TriggerClientEvent('QBCore:Notify', source, 'You must be on duty before firing someone!', 'error') end
+    if SourcePlayerIsBoss == false then return TriggerClientEvent('QBCore:Notify', source, 'You must be a boss to fire someone!', 'error') end
+
+    if Player then
+        local result =  MySQL.query.await('DELETE FROM player_multijobs WHERE cid = @cid AND job = @job', {
+            ['@cid'] = Player.PlayerData.citizenid,
+            ['@job'] = job,
+        })
+
+        if result.affectedRows > 0 then
+            TriggerClientEvent('QBCore:Notify', src, 'Successfully removed Job from Player', 'success')
+        else
+            TriggerClientEvent('QBCore:Notify', src, 'Player does not have this job', 'error')
+        end
     else
         TriggerClientEvent('QBCore:Notify', src, 'Player not online', 'error')
     end
