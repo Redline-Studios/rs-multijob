@@ -1,6 +1,6 @@
 fx_version "cerulean"
 
-description "Basic MutiJob System"
+description "Basic MultiJob System for QBCore"
 author "Redline Studios"
 version '1.0.0'
 
